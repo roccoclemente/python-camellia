@@ -178,6 +178,14 @@ class CamelliaCipher(PEP272Cipher):
     #: block size of the camellia cipher
     block_size = 16
 
+    @property
+    def IV(self):
+        if self.mode in (MODE_ECB, MODE_CTR):
+            return None
+        if self.mode == MODE_CBC:
+            return bytes(self._status_buffer)
+        return super(CamelliaCipher, self).IV
+
     def __init__(self, key, mode, **kwargs):
         """Constructer of Cipher class. See :func:`camellia.new`."""
         keytable = Camellia_Ekeygen(key)

@@ -18,6 +18,8 @@ Changed
 - When safe, do not create ffi objects, but directly pass *bytes* to cffi.
   It is safe if it replaces a *const char\**, or it is freshly created for exactly that purpose.
 - ECB and CBC modes of operation are directly implemented in C, resulting in a speed increase of about 20% on CPython.
+- Make IV update itself. As this is the behaviour is mandated by PEP-272 I consider the previous one a bug (thus not
+  affected by semver).
 
 .. _`Semantic Versioning`: https://semver.org/spec/v2.0.0.html
 .. _PEP-484: https://www.python.org/dev/peps/pep-0484/
